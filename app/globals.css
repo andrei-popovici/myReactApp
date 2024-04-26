@@ -2,32 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer components{
+  .sidebar-icon{
+    @apply relative flex items-center justify-center
+    h-20 w-20 mt-4 mx-auto
+    bg-gray-700 text-white
+    hover:bg-gray-600 hover:text-secondary
+    rounded-full hover:rounded-br-md
+    transition-all duration-150 ease-linear
+    cursor-pointer;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .sidebar-tooltip{
+    @apply absolute p-2 w-auto min-w-max left-24
+    rounded-xl shadow bg-gray-600 text-white
+    transition-all duration-150 ease-linear scale-0 origin-left;
   }
+
+  .noteS{
+    @apply relative p-2 w-48 h-48 rounded-3xl mb-2
+    shadow bg-gray-600 text-white break-words overflow-y-hidden;
+  }
+
+  .notePart{
+    @apply relative object-cover p-2 w-48 h-48 rounded-3xl mb-2
+    shadow bg-gray-600 text-white break-words overflow-y-visible
+    scale-100 hover:scale-150 transition-all duration-150 ease-linear
+    ;
+  }
+
+  .notesPage{
+    @apply relative left-28 flex flex-wrap gap-x-2;
+  }
+
+  .prompt{
+    @apply relative p-1 flex flex-wrap flex-col shadow-2xl text-secondary bg-gray-50 w-96
+    left-28 rounded-xl self-center;
+
+  }
+
 }
