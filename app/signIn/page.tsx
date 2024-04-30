@@ -1,15 +1,17 @@
 'use client';
 import {useForm} from "react-hook-form";
 import pb from "@/app/lib/pocketbase"
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {randomInt} from "node:crypto";
-
+import UserContext from "@/app/userContext"
 
 export default function SignIn() {
     const {register, handleSubmit, reset} = useForm();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isLogged, setIsLogged] = useState<boolean>(false);
     const [dummy ,setDummy] = useState(0);
+    const [user, setUser] = useContext(UserContext);
+
     async function signInUser(data: any) {
         setIsLoading(true);
         try {
@@ -18,6 +20,7 @@ export default function SignIn() {
                 data.password,
             );
             setIsLogged(pb.authStore.isValid);
+            setUser(pb.authStore.model?.id);
             setIsLoading(false);
         } catch (ClientResponseError) {
             alert("Try again : )");
@@ -54,7 +57,7 @@ export default function SignIn() {
             }
             {!isLogged &&
                 <form onSubmit={handleSubmit(signInUser)} className='prompt'>
-                    <h2 className='text-center text-xl font-extrabold'>SignIn</h2>
+                    <h2 className='text-center text-xl font-extrabold'>Sign In</h2>
                     <input placeholder='Username'
                            className='shadow-gray-700 focus:outline-none p-2 bg-gray-600 rounded-xl text-gray-100'
                            {...register('username')}/>

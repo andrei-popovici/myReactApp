@@ -1,9 +1,9 @@
 'use client';
 
 import pb from "@/app/lib/pocketbase"
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useRouter} from "next/navigation";
-
+import UserContext from "@/app/userContext"
 
 
 
@@ -12,7 +12,7 @@ export default function CreateNote(){
     const [content, setContent] = useState("");
 
     const router = useRouter();
-
+    const [user,_] = useContext(UserContext);
     const create = async()=> {
         // await fetch('http://127.0.0.1:8090/api/collections/notes/records', {
         //     method: 'POST',
@@ -27,7 +27,7 @@ export default function CreateNote(){
         // setTitle('');
         // setContent('');
         // router.refresh();
-        await pb.collection('notes').create({"title":title,"content":content});
+        await pb.collection('notes').create({"title":title,"content":content,"user":user});
         setTitle('');
         setContent('');
         router.refresh();
