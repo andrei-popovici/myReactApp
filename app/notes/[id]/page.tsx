@@ -1,8 +1,4 @@
-
-import PocketBase from 'pocketbase'
-
-const pb = new PocketBase('http://127.0.0.1:8090')
-
+import pb from "@/app/lib/pocketbase"
 async function getNote(noteId: string) {
     // const response = await pb.collection('notes').getOne(noteId);
     // return response;

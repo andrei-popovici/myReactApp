@@ -1,11 +1,11 @@
 'use client';
 
+import pb from "@/app/lib/pocketbase"
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 
-import PocketBase from 'pocketbase'
 
-const pb = new PocketBase('http://127.0.0.1:8090')
+
 
 export default function CreateNote(){
     const [title,setTitle,] = useState("");

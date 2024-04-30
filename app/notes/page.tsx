@@ -1,8 +1,7 @@
 import Link from "next/link";
 import CreateNote from "@/app/notes/CreateNote";
 import { RefreshOnFocus } from "./refreshOnFocus";
-import PocketBase from 'pocketbase'
-const pb = new PocketBase('http://127.0.0.1:8090')
+import pb from "@/app/lib/pocketbase"
 
 // this is needed beacause I don't use fetch, so I have to specify the caching method
 export const dynamic = 'auto',
