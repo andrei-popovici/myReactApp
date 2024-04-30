@@ -24,7 +24,7 @@ export default function SignIn() {
             setIsLoading(false);
         }
         reset();
-    };
+    }
 
     function logout() {
         pb.authStore.clear();
@@ -39,12 +39,12 @@ export default function SignIn() {
                 <h1 className='relative left-24'> Loading...</h1>
             }
 
-            <h1 className='relative left-24'>Is signed in {isLogged.toString()}</h1>
+            <h1 className='relative left-24 text-gray-800'>Is signed in {isLogged.toString()}</h1>
 
             {isLogged &&
                 <>
-                    <h1 className='text-4xl text-center mt-6 ml-36 font-bold text-gray-50'>
-                        Hello!
+                    <h1 className='text-4xl text-center mt-6 ml-36 font-bold text-gray-800 '>
+                        Hello, {pb.authStore.model?.username}!
                     </h1>
                     <button type='button' onClick={logout}
                             className=' relative top-0.5 min-w-min px-1.5 bg-gray-600 rounded self-center text-white hover:bg-gray-500'>Done
