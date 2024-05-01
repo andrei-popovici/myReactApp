@@ -3,6 +3,7 @@ import {useState} from "react";
 import Image from "next/image";
 import React from 'react';
 import Img from 'next/image'
+import pb from "@/app/lib/pocketbase";
 
 export default function AiPhotoPage() {
     const [prompt, setPrompt] = useState("");
@@ -11,7 +12,11 @@ export default function AiPhotoPage() {
 
     const createImage = async (e:any) => {
         e.preventDefault(); // Prevent default form submission
-
+        const storedUser = localStorage.getItem('user');
+        if (!storedUser) {
+            alert('User not logged in');
+            return;
+        }
         setIsLoading(true);
         console.log(`Creating image... ${prompt}`);
 
@@ -29,6 +34,7 @@ export default function AiPhotoPage() {
         setImage(imageURL);
         setIsLoading(false);
         setPrompt('');
+        await pb.collection('photos').create({ "image": imageURL, "user": storedUser });
     };
 
     return (
