@@ -29,22 +29,22 @@ export default function SignIn() {
     }
 
     return (
-        <>
-            {isLoading &&
-                <h1 className='relative left-24'> Loading...</h1>}
-            <form onSubmit={handleSubmit(signUpUser)} className='prompt'>
-                <h2 className='text-center text-xl font-extrabold'>Sign Up</h2>
-                <input placeholder='Username'
-                       className='shadow-gray-700 focus:outline-none p-2 bg-gray-600 rounded-xl text-gray-100'
-                       {...register('username')}/>
-                <input placeholder='Password' type='password'
-                       className='h-10 indent-2 focus:outline-none rounded-xl bg-gray-200'
-                       {...register('password')}/>
-                <button type="submit"
-                        className=' relative top-0.5 min-w-min px-1.5 bg-gray-600 rounded self-center text-white hover:bg-gray-500'>Done
-                </button>
-            </form>
-        </>
+         <div className='relative flex flex-col gap-y-4 h-screen self-center w-screen bg-secondary overflow-hidden'>
+           {!isLoading &&
+                <form onSubmit={handleSubmit(signUpUser)} className='prompt mt-36 border-2 border-gray-900'>
+                    <h2 className='text-center text-xl font-extrabold top-32'>Sign Up</h2>
+                    <input placeholder='Username'
+                           className='focus:outline-none p-2 bg-gray-600 rounded-xl text-gray-100'
+                           {...register('username')}/>
+                    <input placeholder='Password' type='password'
+                           className='h-10 indent-2 focus:outline-none rounded-xl bg-gray-200'
+                           {...register('password')}/>
+                    <button type="submit"
+                            className=' relative top-0.5 min-w-min px-1.5 bg-gray-600 rounded self-center text-white hover:bg-gray-500'>Done
+                    </button>
+                </form>
+            }
+         </div>
     )
 
 }

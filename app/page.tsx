@@ -4,7 +4,7 @@ import UserContext from "@/app/userContext";
 
 export default function Home() {
     return (
-            <div className="relative bg-gray-800 h-screen flex flex-wrap flex-col items-center gap-y-4">
+            <div className="relative bg-gray-800 h-screen flex flex-wrap flex-col items-center gap-y-4 overflow-hidden">
                 <h1 className='relative text-secondary font-extrabold text-9xl top-40 left-10  text-center'>
                     Ce poti face cu react???
                 </h1>
