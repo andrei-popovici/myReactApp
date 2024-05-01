@@ -40,10 +40,12 @@ export default function AiPhotoPage() {
     return (
         <div className='h-screen bg-gray-800 '>
             {isLoading ? (
-                <div className='relative top-4 flex flex-col gap-y-4 self-center h-screen'>
-                    <h1 className='text-4xl text-center mt-6 ml-36 font-bold text-gray-50'>Ai Generation Tool</h1>
-                    <Img className='bg-gray-500 relative top-14 left-12 flex self-center shadow-2xl rounded-2xl'
-                         width='720' height='720' src={require('./img.png')} alt='image'/>
+                <div className="min-h-screen  flex items-center justify-center bg-secondary">
+                    <div className="flex flex-col relative bottom-10 items-center">
+                        <div
+                            className="w-20 h-20 rounded-full border-4 border-gray-700 border-t-4 border-t-gray-100 animate-spin"></div>
+                        <p className="mt-4 text-xl relative left-1.5 font-semibold text-gray-100">Loading...</p>
+                    </div>
                 </div>
             ) : (
                 <div className='relative top-4 flex flex-col gap-y-4 self-center max-h-screen w-screen'>
@@ -51,7 +53,7 @@ export default function AiPhotoPage() {
                     {!image &&
                         <h1 className='text-6xl text-center ml-36 font-bold text-gray-50'>Ai Generation Tool</h1>}
                     {image &&
-                        <h1 className='text-4xl text-center ml-36 font-bold text-gray-50'>Ai Generation Tool</h1>}
+                        <h1 className='text-4xl text-center mt-24 ml-36 font-bold text-gray-50'>Ai Generation Tool</h1>}
                     {image &&
                         <Image className='bg-gray-500 relative left-16 flex self-center shadow-2xl rounded-2xl'
                                width='720' height='720' src={image} alt='image' priority/>}
