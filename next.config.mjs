@@ -4,7 +4,9 @@ const nextConfig = {
         domains: [
             'oaidalleapiprodscus.blob.core.windows.net',
         ],
-    }
+    },
+
 };
+
 
 export default nextConfig;

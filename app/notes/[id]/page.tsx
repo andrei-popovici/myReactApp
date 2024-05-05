@@ -1,4 +1,5 @@
 import pb from "@/app/lib/pocketbase"
+import {revalidatePath} from "next/cache";
 async function getNote(noteId: string) {
     // const response = await pb.collection('notes').getOne(noteId);
     // return response;

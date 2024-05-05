@@ -6,6 +6,7 @@ import {randomInt} from "node:crypto";
 import UserContext from "@/app/userContext"
 
 export default function SignIn() {
+
     const {register, handleSubmit, reset} = useForm();
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [isLogged, setIsLogged] = useState<boolean>(false);
@@ -32,7 +33,10 @@ export default function SignIn() {
             setUser(pb.authStore.model?.id);
             // Store user in localStorage to stay signed in
             localStorage.setItem('user', pb.authStore.model?.id);
+            document.cookie = "yourCookie=${pb.authStore.model?.id};path=/;"
             setIsLoading(false);
+            console.log(user);
+            console.log(pb.authStore.model?.id);
         } catch (ClientResponseError) {
             alert("Try again : )");
             setIsLoading(false);
