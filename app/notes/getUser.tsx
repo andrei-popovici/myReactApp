@@ -9,7 +9,7 @@ export default function GetUser({ children }: { children: React.ReactNode; }) {
     return (
         // Render children with storedUser as props
         <>
-
+            {children}
         </>
     );
 }

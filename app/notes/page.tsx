@@ -32,8 +32,6 @@ export default   function NotesPage() {
     //
     // const notes = await getNotesUser('1');
 
-    const {req} = context;
-    
     return (
             <div className='flex flex-col gap-y-6 h-screen bg-secondary overflow-y-auto overflow-x-hidden '>
                 <h1 className='relative mt-2 text-gray-950 text-5xl font-bold left-28'>Notes</h1>
