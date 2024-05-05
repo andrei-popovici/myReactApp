@@ -15,7 +15,6 @@ export default function CreateNote() {
             alert('User not logged in');
             return;
         }
-
         await pb.collection('notes').create({ "title": title, "content": content, "user": storedUser });
         setTitle('');
         setContent('');

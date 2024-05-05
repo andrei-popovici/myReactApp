@@ -15,14 +15,11 @@ export default function NotesPage() {
     const [user, setUser] = useState<string | null>(null);
     const router = useRouter();
 
-
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
-        setUser(storedUser);
 
             if (!storedUser) {
                 console.error("User not logged in");
-                return;
             }
             // Fetch notes associated with the current user
             getNotes(storedUser).then(data => {
