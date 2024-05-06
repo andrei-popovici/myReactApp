@@ -1,6 +1,5 @@
 import pb from "@/app/lib/pocketbase";
 import Link from "next/link";
-import {revalidatePath} from "next/cache";
 
 export const dynamic = 'auto',
     dynamicParams = true,
@@ -20,16 +19,6 @@ export async function getNotesUser(storedUser:string|null) {
         const queryString = `user = "${storedUser}"`;
         // Retrieve notes associated with the current user
         const data = await pb.collection('notes').getList(1,30,{ filter: queryString});
-        return data?.items as any[];
-    } catch(error) {
-        console.error("Error fetching notes:", error);
-        return [];
-    }
-}
-
-export async function getNotes() {
-    try {
-        const data = await pb.collection('notes').getList();
         return data?.items as any[];
     } catch(error) {
         console.error("Error fetching notes:", error);

@@ -23,7 +23,7 @@ const SideBar = () =>{
                 <SideBarIcon icon={<LiaRobotSolid size='45'/>} version='robot' />
             </Link>
         </div>
-            <Link href="/signIn" className='fixed flex bottom-8 left-2'>
+            <Link href="./logOut" className='fixed flex bottom-8 left-2'>
                 <SideBarIcon icon={<FaRegUserCircle size='45'/>} version='user' />
             </Link>
         </>

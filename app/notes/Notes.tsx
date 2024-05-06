@@ -1,11 +1,9 @@
 import {getNotesUser,Note} from "@/app/notes/getNotes";
-interface ChildProps {
-    storedUser: any; // Adjust the type according to your storedUser data type
-}
-export async function Notes({ storedUser }: ChildProps) {
 
-    console.log(storedUser);
-    const notes = await getNotesUser(storedUser);
+export async function Notes(props:{userId:string}) {
+
+    console.log('userId from Notes',props.userId);
+    const notes = await getNotesUser(props.userId);
     return (
         <div className='notesPage'>
             {notes?.map(note => {

@@ -3,12 +3,7 @@ import pb from "@/app/lib/pocketbase";
 import {z} from "zod";
 import {revalidatePath} from "next/cache";
 
-export async function createNote(
-    prevState: {
-        message:string;
-    },
-    formData: FormData,
-) {
+export async function createNote(formData: FormData,) {
 
     const schema = z.object({
         title: z.string().min(1),
