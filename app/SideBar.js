@@ -6,6 +6,7 @@ import { SiGooglehome } from "react-icons/si";
 import { FaNoteSticky } from "react-icons/fa6";
 import { LiaRobotSolid } from "react-icons/lia";
 import { FaRegUserCircle } from "react-icons/fa";
+import { FaKey } from "react-icons/fa6";
 
 const SideBar = () =>{
     return(
@@ -22,6 +23,11 @@ const SideBar = () =>{
             <Link href="/AiPhoto">
                 <SideBarIcon icon={<LiaRobotSolid size='45'/>} version='robot' />
             </Link>
+
+            <Link href="/keyWords">
+                <SideBarIcon icon={<FaKey size='45'/>} version='robot' />
+            </Link>
+
         </div>
             <Link href="./logOut" className='fixed flex bottom-8 left-2'>
                 <SideBarIcon icon={<FaRegUserCircle size='45'/>} version='user' />
