@@ -25,7 +25,7 @@ const SideBar = () =>{
             </Link>
 
             <Link href="/keyWords">
-                <SideBarIcon icon={<FaKey size='45'/>} version='robot' />
+                <SideBarIcon icon={<FaKey size='45'/>} version='keywords' />
             </Link>
 
         </div>
@@ -48,7 +48,11 @@ const SideBarIcon = ({icon,version}) =>{
         );
     }else if(version === 'note'){
         text = 'Notes 📝';
-    }else if(version === 'robot'){
+    }
+    else if(version === 'keywords'){
+        text = 'Keywords 🔑';
+    }
+    else if(version === 'robot'){
         text = 'Ai Generator 🦾';
     }else if(version === 'user'){
         return (

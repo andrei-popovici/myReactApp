@@ -21,7 +21,8 @@ export function AddKeyWord(props:{userId:string}) {
         <>
             <form ref={ref} action={async formData => {
                 ref.current?.reset();
-                await createKeyWord(formData)} }className='prompt'>
+                alert(await createKeyWord(formData));
+            } } className='prompt mt-96'>
                 <h1 className='text-center text-xl font-extrabold'>Add KeyWord</h1>
                 <input className='shadow-gray-700 focus:outline-none p-2 bg-gray-600 rounded-xl text-gray-100'
                        type='text' id='keyWord' name='keyWord' />

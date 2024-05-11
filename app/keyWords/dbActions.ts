@@ -23,29 +23,29 @@ export async function createKeyWord(formData: FormData,) {
 
     try {
         const users = await getUsersByKeyWord(word);
-        console.log('exists');
         if (!users.map(user => user = user.id).includes(userId)) {
             const keyWord = await pb.collection("keyWords").getFirstListItem(`content="${word}"`)
             const keyUser = await pb.collection("keyByUser").getFirstListItem(`keyword="${keyWord.id}"`)
             await pb.collection("keyByUser").update(`${keyUser.id}`, {
                 'user+': `${userId}`
             })
+            return (`Added ${word} in your account`);
         } else {
-            console.log('You already have this keyword !');
+            return('You already have this keyword !');
         }
-    } catch (_) {
-        console.log('doesn t');
+    } catch (e) {
+        console.log(e);
         const key = await pb.collection("keyWords").create({
                     'content': `${word}`
                 })
-                console.log(key);
                 try {
                     const keyUser = await pb.collection("keyByUser").create({
                         'keyword': `${key.id}`,
                         'user': `${userId}`
                     })
+                    return('Keyword added!');
                 }catch(e){
-                    console.log(e);
+                    return(e);
                 }
     }
 
