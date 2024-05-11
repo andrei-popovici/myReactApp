@@ -1,58 +1,65 @@
-import Link from "next/link";
-import CreateNote from "@/app/notes/CreateNote";
-import { RefreshOnFocus } from "./refreshOnFocus";
-import pb from "@/app/lib/pocketbase"
+// import {AddNote} from "@/app/notes/AddNote";
+// import UserContext from "@/app/userContext";
+// import {Notes} from "@/app/notes/Notes";
+// import {useContext} from "react";
+// import GetUser from "@/app/notes/getUser";
 
-// this is needed beacause I don't use fetch, so I have to specify the caching method
-export const dynamic = 'auto',
-    dynamicParams = true,
-    revalidate = 0,
-    fetchCache = 'auto',
-    runtime = 'nodejs',
-    preferredRegion = 'auto'
-
-async function getNotes() {
-    // const res = await fetch('http://127.0.0.1:8090/api/collections/notes/records?page&perPage',
-    //     {cache: "no-cache"});
-    // const data = await res.json();
-    try {
-        const data = await pb.collection('notes').getList();
-        return data?.items as any[];
-    }catch(error){
-        console.error("habar n am");
-    }
-}
+import {cookies} from "next/headers";
+import {logout} from "@/app/actions";
+import {Notes} from './Notes'
+import {AddNote} from "./AddNote";
+import {RefreshOnFocus} from "@/app/notes/refreshOnFocus";
+import {redirect} from "next/navigation";
 
 export default async function NotesPage() {
+    // const [notes, setNotes] = useState<any[]>([]);
+    // const [user, setUser] = useState<string | null>("");
+    // const router = useRouter();
+    //
+    // useEffect(() => {
+    //     const storedUser = localStorage.getItem('user');
+    //
+    //     if (!storedUser) {
+    //         console.error("User not logged in");
+    //     }
+    //     setUser(storedUser);
+    //     // Fetch notes associated with the current user
+    //     getNotesUser(storedUser).then(data => {
+    //         setNotes(data);
+    //     }).catch(error => {
+    //         console.error("Error fetching notes:", error);
+    //     });
+    //     console.log(notes);
+    //     console.log('it s here');
+    //     console.log(storedUser);
+    //
+    // }, []);
+    // console.log(notes);
+    // console.log(`User is "${user}"`);
+    //
+    // const notes = await getNotesUser('1');
+    const cookie = cookies().get('pb_auth');
 
-    try{
-    const notes = await getNotes();
+    // This never happens because of the middleware,
+    // but we must make typescript happy
+    if (!cookie){
+
+        console.log("User not found");
+        redirect('/');
+
+    }
+
+    const {model} = JSON.parse(cookie.value);
+
+    console.log('userId from pages',model.id);
     return (
-        <div className='flex flex-col gap-y-6 h-screen bg-secondary overflow-y-auto overflow-x-hidden'>
+        <div className='flex flex-col gap-y-6 h-screen bg-secondary overflow-y-auto overflow-x-hidden '>
             <h1 className='relative mt-2 text-gray-950 text-5xl font-bold left-28'>Notes</h1>
-            <div className='notesPage'>
-                {notes?.map(note => {
-                    return <Note key={note.id} note={note}/>;
-                })}
-            </div>
-            <CreateNote/>
+            <Notes userId={model.id}/>
+            <AddNote userId={model.id}/>
             <RefreshOnFocus/>
         </div>
-    );}catch(e){
-        console.error(e);
-    }
-}
 
-function Note({ note }: any) {
-    const { id, title, content, created } = note || {};
-
-    return (
-        <Link href={`/notes/${id}`}>
-            <div className='noteS'>
-                <h2 className='text-xl font-bold'>{title}</h2>
-                <h5>{content}</h5>
-                <p>{created}</p>
-            </div>
-        </Link>
     );
 }
+
