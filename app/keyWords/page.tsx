@@ -1,6 +1,7 @@
 import {getUsersByKeyWord} from "@/app/keyWords/dbActions";
 import {AddKeyWord} from "@/app/keyWords/AddKeyWord";
 import {cookies} from "next/headers";
+import {redirect} from "next/navigation";
 
 export const dynamic = 'auto',
     dynamicParams = true,
@@ -16,6 +17,8 @@ export default  async function KeyWords() {
     if(cookie){
         const {model} = JSON.parse(cookie.value);
         id = model.id;
+    }else{
+        redirect('/');
     }
 
     return (

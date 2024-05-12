@@ -1,19 +1,27 @@
 'use server';
 import pb from "@/app/lib/pocketbase";
+import {cookies} from "next/headers";
+import {revalidatePath} from "next/cache";
 
+export async function setWord(formData: FormData) {
+    const keyword = formData.get('keyWord') as string;
+
+    const wordCookie = JSON.stringify({keyword});
+    console.log("wordCookie: ", wordCookie);
+
+    cookies().set('word', wordCookie);
+    revalidatePath('/adminPage');
+}
 
 export async function getUsersByKeyWord(word: string) {
+
     const keyWord = await pb.collection("keyWords").getFirstListItem(`content="${word}"`)
     const id = keyWord.id;
 
     const users = await pb.collection("users").getList(1, 30, {
         filter: `keyByUser_via_user.keyword ?~ "${id}"`,
     })
-
-    console.log(users.items as any[]);
-
-    return users?.items as any[]
-
+    return users.items as any[];
 }
 
 export async function createKeyWord(formData: FormData,) {
@@ -31,24 +39,23 @@ export async function createKeyWord(formData: FormData,) {
             })
             return (`Added ${word} in your account`);
         } else {
-            return('You already have this keyword !');
+            return ('You already have this keyword !');
         }
     } catch (e) {
         console.log(e);
         const key = await pb.collection("keyWords").create({
-                    'content': `${word}`
-                })
-                try {
-                    const keyUser = await pb.collection("keyByUser").create({
-                        'keyword': `${key.id}`,
-                        'user': `${userId}`
-                    })
-                    return('Keyword added!');
-                }catch(e){
-                    return(e);
-                }
+            'content': `${word}`
+        })
+        try {
+            const keyUser = await pb.collection("keyByUser").create({
+                'keyword': `${key.id}`,
+                'user': `${userId}`
+            })
+            return ('Keyword added!');
+        } catch (e) {
+            return (e);
+        }
     }
-
 }
 
 

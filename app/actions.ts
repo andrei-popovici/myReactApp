@@ -14,7 +14,7 @@ export async function login(formData: FormData) {
             .authWithPassword(username, password);
 
         const cookie = JSON.stringify({token, model});
-        console.log("cookie: ",cookie);
+        console.log("cookie: ", cookie);
 
         cookies().set('pb_auth', cookie, {
             secure: true,
@@ -22,15 +22,47 @@ export async function login(formData: FormData) {
             sameSite: 'strict',
             httpOnly: true,
         });
-    }catch(err){
+    } catch (err) {
         console.log(err);
     }
 
     redirect('/');
 }
 
+export async function loginAdmin(formData: FormData) {
+    const username = formData.get('username') as string;
+    const password = formData.get('password') as string;
+
+    try {
+        const {token, record: model} = await pb
+            .admins
+            .authWithPassword(username, password);
+
+        const cookie = JSON.stringify({token, model});
+        console.log("cookie: ", cookie);
+
+        cookies().set('pb_admin', cookie, {
+            secure: true,
+            path: '/',
+            sameSite: 'strict',
+            httpOnly: true,
+        });
+    } catch (err) {
+        console.log(err);
+    }
+    redirect('/adminPage');
+}
+
 export async function logout(props: any) {
     cookies().delete('pb_auth');
+    const wordCookie = JSON.stringify('cat');
+    console.log("wordCookie: ", wordCookie);
+
+    cookies().set('word', wordCookie);
     cookies().delete('image');
     redirect('/');
+}
+export async function logoutAdmin(props: any) {
+    cookies().delete('pb_admin');
+    redirect('/signInAdmin');
 }

@@ -7,6 +7,7 @@ import { FaNoteSticky } from "react-icons/fa6";
 import { LiaRobotSolid } from "react-icons/lia";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaKey } from "react-icons/fa6";
+import { RiAdminLine } from "react-icons/ri";
 
 const SideBar = () =>{
     return(
@@ -28,6 +29,10 @@ const SideBar = () =>{
                 <SideBarIcon icon={<FaKey size='45'/>} version='keywords' />
             </Link>
 
+            <Link href="/signInAdmin">
+                <SideBarIcon icon={<RiAdminLine size='45'/>} version='admin' />
+            </Link>
+
         </div>
             <Link href="./logOut" className='fixed flex bottom-8 left-2'>
                 <SideBarIcon icon={<FaRegUserCircle size='45'/>} version='user' />
@@ -46,7 +51,10 @@ const SideBarIcon = ({icon,version}) =>{
                 <span className='sidebar-tooltip pt-1.5 group-hover:scale-100'>Home 🏠</span>
             </div>
         );
-    }else if(version === 'note'){
+    }else if(version === 'admin'){
+        text = 'Admin 🧑🏻‍💼'
+    }
+    else if(version === 'note'){
         text = 'Notes 📝';
     }
     else if(version === 'keywords'){
