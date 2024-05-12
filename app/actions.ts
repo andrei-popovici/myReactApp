@@ -55,14 +55,11 @@ export async function loginAdmin(formData: FormData) {
 
 export async function logout(props: any) {
     cookies().delete('pb_auth');
-    const wordCookie = JSON.stringify('cat');
-    console.log("wordCookie: ", wordCookie);
-
-    cookies().set('word', wordCookie);
     cookies().delete('image');
     redirect('/');
 }
 export async function logoutAdmin(props: any) {
     cookies().delete('pb_admin');
+    cookies().delete('word');
     redirect('/signInAdmin');
 }

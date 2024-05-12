@@ -22,14 +22,12 @@ export function Query() {
             <form ref={ref} action={async formData => {
                 ref.current?.reset();
                 await setWord(formData);
-            } } className='prompt'>
+            } } className='prompt mt-24'>
                 <h1 className='text-center text-xl font-extrabold'>Search by KeyWord</h1>
                 <input className='shadow-gray-700 focus:outline-none p-2 bg-gray-600 rounded-xl text-gray-100'
                        type='text' id='keyWord' name='keyWord' />
                 <SubmitButton/>
             </form>
-
         </>
-
     )
 }

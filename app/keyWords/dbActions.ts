@@ -15,13 +15,18 @@ export async function setWord(formData: FormData) {
 
 export async function getUsersByKeyWord(word: string) {
 
-    const keyWord = await pb.collection("keyWords").getFirstListItem(`content="${word}"`)
-    const id = keyWord.id;
+    try {
+        const keyWord = await pb.collection("keyWords").getFirstListItem(`content="${word}"`)
+        const id = keyWord.id;
 
     const users = await pb.collection("users").getList(1, 30, {
         filter: `keyByUser_via_user.keyword ?~ "${id}"`,
     })
     return users.items as any[];
+
+    } catch (_) {
+
+    }
 }
 
 export async function createKeyWord(formData: FormData,) {
@@ -31,7 +36,7 @@ export async function createKeyWord(formData: FormData,) {
 
     try {
         const users = await getUsersByKeyWord(word);
-        if (!users.map(user => user = user.id).includes(userId)) {
+        if (!users?.map(user => user = user.id).includes(userId)) {
             const keyWord = await pb.collection("keyWords").getFirstListItem(`content="${word}"`)
             const keyUser = await pb.collection("keyByUser").getFirstListItem(`keyword="${keyWord.id}"`)
             await pb.collection("keyByUser").update(`${keyUser.id}`, {
